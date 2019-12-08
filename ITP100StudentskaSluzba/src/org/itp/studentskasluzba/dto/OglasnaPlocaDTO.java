@@ -3,12 +3,12 @@ package org.itp.studentskasluzba.dto;
 public class OglasnaPlocaDTO {
 
 	int id;
-	String obavjest;
+	String obavijest;
 	
-	public OglasnaPlocaDTO(int id, String obavjest) {
+	public OglasnaPlocaDTO(int id, String obavijest) {
 		super();
 		this.id = id;
-		this.obavjest = obavjest;
+		this.obavijest = obavijest;
 	}
 	
 	public OglasnaPlocaDTO() {
@@ -20,11 +20,11 @@ public class OglasnaPlocaDTO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getObavjest() {
-		return obavjest;
+	public String getObavijest() {
+		return obavijest;
 	}
-	public void setObavjest(String obavjest) {
-		this.obavjest = obavjest;
+	public void setObavijest(String obavijest) {
+		this.obavijest = obavijest;
 	}
 	
 }

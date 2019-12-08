@@ -13,7 +13,7 @@ public class StudentiDAO {
 		Connection conn = null;
 		java.sql.PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM  ciklus";
+		String query = "SELECT * FROM  studenti";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -40,7 +40,7 @@ public class StudentiDAO {
 		boolean retVal = false;
 		Connection conn = null;
 		java.sql.PreparedStatement ps = null;
-		String query = "INSERT INTO ciklus (naziv) VALUES (?)";
+		String query = "INSERT INTO studenti (ime_studenta, prezime_studenta, broj_indeksa, godina_upisa) VALUES (?, ?, ?, ?)";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -103,32 +103,32 @@ public class StudentiDAO {
 		return retVal;
 	}
 
-//	public static StudentiDTO getById(int stu) {
-//		StudentiDTO retVal = new StudentiDTO();
-//		Connection conn = null;
-//		java.sql.PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		String query = "SELECT * FROM ciklus WHERE id = ?";
-//		try {
-//			conn = ConnectionPool.getInstance().checkOut();
-//			ps = conn.prepareStatement(query);
-//			ps.setInt(1, stu);
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				retVal.setId(rs.getInt(1));
-//				retVal.setIme(rs.getString(2));
-//				retVal.setPrezime(rs.getString(3));
-//				retVal.setIndeks(rs.getInt(4));
-//				retVal.setUpis(rs.getInt(5));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			DBUtilities.getInstance().showSQLException(e);
-//		} finally {
-//			ConnectionPool.getInstance().checkIn(conn);
-//			DBUtilities.getInstance().close(ps, rs);
-//		}
-//		return retVal;
-//	}
+	public static StudentiDTO getById(int stu) {
+		StudentiDTO retVal = new StudentiDTO();
+		Connection conn = null;
+		java.sql.PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM ciklus WHERE id = ?";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, stu);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				retVal.setId(rs.getInt(1));
+				retVal.setIme(rs.getString(2));
+				retVal.setPrezime(rs.getString(3));
+				retVal.setIndeks(rs.getInt(4));
+				retVal.setUpis(rs.getInt(5));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+	}
 	
 }

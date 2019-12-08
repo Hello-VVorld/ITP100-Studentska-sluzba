@@ -39,7 +39,7 @@ public class NastavnikDAO {
 		boolean retVal = false;
 		Connection conn = null;
 		java.sql.PreparedStatement ps = null;
-		String query = "INSERT INTO ciklus (naziv) VALUES (?)";
+		String query = "INSERT INTO nastavnik (ime_nastavnika, prezime_nastavnika, zvanje_nastavnika) VALUES (?, ?, ?)";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -100,31 +100,31 @@ public class NastavnikDAO {
 		return retVal;
 	}
 
-//	public static NastavnikDTO getById(int nastavnik) {
-//		NastavnikDTO retVal = new NastavnikDTO();
-//		Connection conn = null;
-//		java.sql.PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		String query = "SELECT * FROM ciklus WHERE id = ?";
-//		try {
-//			conn = ConnectionPool.getInstance().checkOut();
-//			ps = conn.prepareStatement(query);
-//			ps.setInt(1, nastavnik);
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				retVal.setId(rs.getInt(1));
-//				retVal.setIme(rs.getString(2));
-//				retVal.setPrezime(rs.getString(3));
-//				retVal.setZvanje(rs.getString(4));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			DBUtilities.getInstance().showSQLException(e);
-//		} finally {
-//			ConnectionPool.getInstance().checkIn(conn);
-//			DBUtilities.getInstance().close(ps, rs);
-//		}
-//		return retVal;
-//	}
+	public static NastavnikDTO getById(int nastavnik) {
+		NastavnikDTO retVal = new NastavnikDTO();
+		Connection conn = null;
+		java.sql.PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM ciklus WHERE id = ?";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, nastavnik);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				retVal.setId(rs.getInt(1));
+				retVal.setIme(rs.getString(2));
+				retVal.setPrezime(rs.getString(3));
+				retVal.setZvanje(rs.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+	}
 	
 }

@@ -95,29 +95,29 @@ public class CiklusDAO {
 		return retVal;
 	}
 
-//	public static CiklusDTO getById(int ciklus) {
-//		CiklusDTO retVal = new CiklusDTO();
-//		Connection conn = null;
-//		java.sql.PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		String query = "SELECT * FROM ciklus WHERE id = ?";
-//		try {
-//			conn = ConnectionPool.getInstance().checkOut();
-//			ps = conn.prepareStatement(query);
-//			ps.setInt(1, ciklus);
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				retVal.setId(rs.getInt(1));
-//				retVal.setNaziv(rs.getString(2));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			DBUtilities.getInstance().showSQLException(e);
-//		} finally {
-//			ConnectionPool.getInstance().checkIn(conn);
-//			DBUtilities.getInstance().close(ps, rs);
-//		}
-//		return retVal;
-//	}
+	public static CiklusDTO getById(int ciklus) {
+		CiklusDTO retVal = new CiklusDTO();
+		Connection conn = null;
+		java.sql.PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM ciklus WHERE id = ?";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, ciklus);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				retVal.setId(rs.getInt(1));
+				retVal.setNaziv(rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+	}
 
 }

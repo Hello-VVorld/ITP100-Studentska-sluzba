@@ -112,35 +112,35 @@ public class IspitiDAO {
 		return retVal;
 	}
 
-	public static IspitiDTO getById(int ispiti) {
-		IspitiDTO retVal = new IspitiDTO();
-		Connection conn = null;
-		java.sql.PreparedStatement ps = null;
-		ResultSet rs = null;
-		String query = "SELECT * FROM ciklus WHERE id = ?";
-		try {
-			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, ispiti);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				retVal.setId(rs.getInt(1));
-				retVal.setDatum(rs.getString(2));
-				retVal.setOcjena(rs.getInt(3));
-				retVal.setBrojBodova(rs.getInt(4));
-				retVal.setNastavnikId(rs.getInt(5));
-				retVal.setPredmetId(rs.getInt(6));
-				retVal.setStudentiId(rs.getInt(7));
-				retVal.setStudijskiProgramId(rs.getInt(8));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			DBUtilities.getInstance().showSQLException(e);
-		} finally {
-			ConnectionPool.getInstance().checkIn(conn);
-			DBUtilities.getInstance().close(ps, rs);
-		}
-		return retVal;
-	}
+//	public static IspitiDTO getById(int ispiti) {
+//		IspitiDTO retVal = new IspitiDTO();
+//		Connection conn = null;
+//		java.sql.PreparedStatement ps = null;
+//		ResultSet rs = null;
+//		String query = "SELECT * FROM ciklus WHERE id = ?";
+//		try {
+//			conn = ConnectionPool.getInstance().checkOut();
+//			ps = conn.prepareStatement(query);
+//			ps.setInt(1, ispiti);
+//			rs = ps.executeQuery();
+//			while (rs.next()) {
+//				retVal.setId(rs.getInt(1));
+//				retVal.setDatum(rs.getString(2));
+//				retVal.setOcjena(rs.getInt(3));
+//				retVal.setBrojBodova(rs.getInt(4));
+//				retVal.setNastavnikId(rs.getInt(5));
+//				retVal.setPredmetId(rs.getInt(6));
+//				retVal.setStudentiId(rs.getInt(7));
+//				retVal.setStudijskiProgramId(rs.getInt(8));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			DBUtilities.getInstance().showSQLException(e);
+//		} finally {
+//			ConnectionPool.getInstance().checkIn(conn);
+//			DBUtilities.getInstance().close(ps, rs);
+//		}
+//		return retVal;
+//	}
 	
 }

@@ -1,23 +1,25 @@
 package org.itp.studentskasluzba.gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.itp.studentskasluzba.dto.CiklusDTO;
+import org.itp.studentskasluzba.dao.CiklusDAO;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CiklusUnosGUI extends JFrame {
-
 	private JPanel contentPane;
 	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
+	private JButton btnUnos;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -30,10 +32,6 @@ public class CiklusUnosGUI extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	public CiklusUnosGUI() {
 		setTitle("Ciklus | Unos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,6 +51,16 @@ public class CiklusUnosGUI extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnUnos = new JButton("UNOS");
+		btnUnos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nazivCiklusa = textField.getText();
+				CiklusDTO c = new CiklusDTO();
+				c.setNaziv(nazivCiklusa);
+				boolean uspjesno = CiklusDAO.dodajCiklus(c);
+				String bool = uspjesno ? "Uspjesno ste dodali ciklus." : "Dogodila se greska pri dodavanju ciklusa.";
+				JOptionPane.showMessageDialog(null, bool);
+			}
+		});
 		btnUnos.setBounds(341, 226, 91, 23);
 		contentPane.add(btnUnos);
 	}
