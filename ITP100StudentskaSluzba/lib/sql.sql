@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `itp100_db` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `itp100_db`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: itp100_db
@@ -28,7 +26,7 @@ CREATE TABLE `ciklus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `naziv` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +35,7 @@ CREATE TABLE `ciklus` (
 
 LOCK TABLES `ciklus` WRITE;
 /*!40000 ALTER TABLE `ciklus` DISABLE KEYS */;
-INSERT INTO `ciklus` VALUES (1,'prvi ciklus'),(2,'drugi ciklus'),(3,'treci ciklus'),(4,'osnovni'),(5,'postdoc'),(6,'cetvrti ciklus');
+INSERT INTO `ciklus` VALUES (1,'prvi ciklus'),(2,'drugi ciklus'),(3,'treci ciklus'),(4,'osnovni'),(5,'postdoc'),(6,'cetvrti ciklus'),(7,'hhhh'),(8,'testCiklus'),(9,'test34');
 /*!40000 ALTER TABLE `ciklus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +197,7 @@ CREATE TABLE `program` (
   PRIMARY KEY (`id`),
   KEY `fk_studijski program_ciklus1_idx` (`ciklus_fk`),
   CONSTRAINT `fk_studijski program_ciklus1` FOREIGN KEY (`ciklus_fk`) REFERENCES `ciklus` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +206,7 @@ CREATE TABLE `program` (
 
 LOCK TABLES `program` WRITE;
 /*!40000 ALTER TABLE `program` DISABLE KEYS */;
-INSERT INTO `program` VALUES (1,'matematika',1),(2,'bilogija',1),(3,'informatika',1),(4,'geografija',1),(5,'prostorno planiranje',1),(6,'ITP100',1),(7,'ITP1000',3);
+INSERT INTO `program` VALUES (1,'matematika',1),(2,'bilogija',1),(3,'informatika',1),(4,'geografija',1),(5,'prostorno planiranje',1),(6,'ITP100',1),(7,'ITP1000',3),(8,'dfsd',4);
 /*!40000 ALTER TABLE `program` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-09  9:19:29
+-- Dump completed on 2019-12-09 14:11:41

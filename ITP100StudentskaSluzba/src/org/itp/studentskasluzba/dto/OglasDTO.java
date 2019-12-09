@@ -61,4 +61,5 @@ public class OglasDTO {
 		this.oglasnaPlocaId = oglasnaPlocaId;
 	}
 	
+	
 }

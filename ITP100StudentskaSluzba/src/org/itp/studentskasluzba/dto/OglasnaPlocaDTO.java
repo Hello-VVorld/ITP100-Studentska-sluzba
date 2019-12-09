@@ -26,5 +26,10 @@ public class OglasnaPlocaDTO {
 	public void setObavijest(String obavijest) {
 		this.obavijest = obavijest;
 	}
+
+	@Override
+	public String toString() {
+		return id + "-" + obavijest;
+	}
 	
 }

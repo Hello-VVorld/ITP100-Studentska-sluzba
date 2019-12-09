@@ -39,7 +39,7 @@ public class StudijskiProgramDAO {
 		boolean retVal = false;
 		Connection conn = null;
 		java.sql.PreparedStatement ps = null;
-		String query = "INSERT INTO studijski_program (naziv, id_studijski_program) VALUES (?, ?)";
+		String query = "INSERT INTO program (naziv, ciklus_fk) VALUES (?, ?)";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);

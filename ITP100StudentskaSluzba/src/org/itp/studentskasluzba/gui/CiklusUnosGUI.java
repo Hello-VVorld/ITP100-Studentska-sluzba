@@ -63,6 +63,15 @@ public class CiklusUnosGUI extends JFrame {
 		});
 		btnUnos.setBounds(341, 226, 91, 23);
 		contentPane.add(btnUnos);
+		
+		JButton btnPrikazSvihCiklusa = new JButton("Prikaz svih ciklusa");
+		btnPrikazSvihCiklusa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CiklusPrikazSvihGUI prikazSvih=new CiklusPrikazSvihGUI();
+				prikazSvih.setVisible(true);
+			}
+		});
+		btnPrikazSvihCiklusa.setBounds(10, 226, 186, 23);
+		contentPane.add(btnPrikazSvihCiklusa);
 	}
-
 }

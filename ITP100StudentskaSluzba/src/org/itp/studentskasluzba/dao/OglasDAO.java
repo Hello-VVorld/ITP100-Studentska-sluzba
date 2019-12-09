@@ -13,7 +13,7 @@ public class OglasDAO {
 		Connection conn = null;
 		java.sql.PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM  ciklus";
+		String query = "SELECT * FROM  oglas";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -41,14 +41,14 @@ public class OglasDAO {
 		boolean retVal = false;
 		Connection conn = null;
 		java.sql.PreparedStatement ps = null;
-		String query = "INSERT INTO ciklus (naziv) VALUES (?)";
+		String query = "INSERT INTO oglas (naziv, sadrzaj, ploca_fk) VALUES (?, ?, ?)";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
 			ps.setString(1, os.getNaziv());
 			ps.setString(2, os.getSadrzaj());
-			ps.setInt(3, os.getDatum());
-			ps.setBoolean(4, os.isAktivan());
+//			ps.setInt(3, os.getDatum());
+//			ps.setBoolean(4, os.isAktivan());
 			ps.setInt(5, os.getOglasnaPlocaId());
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {

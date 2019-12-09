@@ -89,9 +89,7 @@ public class StudijskiProgramUnosGUI extends JFrame {
 				int idCiklus = Integer.parseInt(parsiranCiklus[0]);
 				StudijskiProgramDTO sp = new StudijskiProgramDTO();
 				sp.setNaziv(nazivSP);
-				CiklusDTO c = new CiklusDTO();
-				c.setId(idCiklus);
-				//sp.setCiklusId(c);
+				sp.setCiklusId(idCiklus);
 				boolean uspjesno = StudijskiProgramDAO.dodajStudijskiProgram(sp);
 				String bool = uspjesno ? "Uspjesno ste dodali program." : "Dogodila se greska pri dodavanju program.";
 				JOptionPane.showMessageDialog(null, bool);
