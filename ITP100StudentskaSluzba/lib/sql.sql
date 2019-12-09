@@ -1,364 +1,251 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
+CREATE DATABASE  IF NOT EXISTS `itp100_db` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `itp100_db`;
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 09, 2019 at 06:06 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: itp100_db
+-- ------------------------------------------------------
+-- Server version	5.7.28-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `itp100_db`
---
-
--- --------------------------------------------------------
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `ciklus`
 --
 
+DROP TABLE IF EXISTS `ciklus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ciklus` (
-  `id_ciklus` int(11) NOT NULL,
-  `naziv` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `naziv` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ciklus`
 --
 
-INSERT INTO `ciklus` (`id_ciklus`, `naziv`) VALUES
-(1, 'prvi ciklus'),
-(2, 'drugi ciklus'),
-(3, 'treci ciklus'),
-(4, 'd'),
-(5, '232323'),
-(6, ''),
-(7, '               '),
-(8, 'dsds'),
-(9, 'fser'),
-(10, 'wewewew');
-
--- --------------------------------------------------------
+LOCK TABLES `ciklus` WRITE;
+/*!40000 ALTER TABLE `ciklus` DISABLE KEYS */;
+INSERT INTO `ciklus` VALUES (1,'prvi ciklus'),(2,'drugi ciklus'),(3,'treci ciklus'),(4,'osnovni'),(5,'postdoc'),(6,'cetvrti ciklus');
+/*!40000 ALTER TABLE `ciklus` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ispiti`
 --
 
+DROP TABLE IF EXISTS `ispiti`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ispiti` (
-  `id_ispit` int(1) NOT NULL,
-  `datum_ispita` varchar(45) NOT NULL,
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `datum` varchar(45) NOT NULL,
   `ocjena` int(2) NOT NULL,
-  `broj_bodova` int(4) NOT NULL,
-  `nastavnik_id_nastavnika` int(11) NOT NULL,
-  `predmet_id_predmeta` int(11) NOT NULL,
-  `studenti_id_studenta` int(11) NOT NULL,
-  `studijski_program_id_studijski_program` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `bodovi` int(4) NOT NULL,
+  `nastavnik_fk` int(11) NOT NULL,
+  `predmet_fk` int(11) NOT NULL,
+  `studenti_fk` int(11) NOT NULL,
+  `program_fk` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_ispiti_nastavnik_idx` (`nastavnik_fk`),
+  KEY `fk_ispiti_predmet1_idx` (`predmet_fk`),
+  KEY `fk_ispiti_studenti1_idx` (`studenti_fk`),
+  KEY `fk_ispiti_studijski program1_idx` (`program_fk`),
+  CONSTRAINT `fk_ispiti_nastavnik` FOREIGN KEY (`nastavnik_fk`) REFERENCES `nastavnik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ispiti_predmet1` FOREIGN KEY (`predmet_fk`) REFERENCES `predmet` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ispiti_studenti1` FOREIGN KEY (`studenti_fk`) REFERENCES `studenti` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ispiti_studijski program1` FOREIGN KEY (`program_fk`) REFERENCES `program` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ispiti`
 --
 
-INSERT INTO `ispiti` (`id_ispit`, `datum_ispita`, `ocjena`, `broj_bodova`, `nastavnik_id_nastavnika`, `predmet_id_predmeta`, `studenti_id_studenta`, `studijski_program_id_studijski_program`) VALUES
-(1, '29. 11. 2019', 9, 85, 1, 1, 1, 1),
-(2, '29.12.2019', 7, 63, 1, 1, 2, 1);
-
--- --------------------------------------------------------
+LOCK TABLES `ispiti` WRITE;
+/*!40000 ALTER TABLE `ispiti` DISABLE KEYS */;
+INSERT INTO `ispiti` VALUES (1,'29. 11. 2019',9,85,1,1,1,1),(2,'29.12.2019',7,63,1,1,2,1);
+/*!40000 ALTER TABLE `ispiti` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `nastavnik`
 --
 
+DROP TABLE IF EXISTS `nastavnik`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nastavnik` (
-  `id_nastavnika` int(11) NOT NULL,
-  `ime_nastavnika` varchar(45) NOT NULL,
-  `prezime_nastavnika` varchar(45) NOT NULL,
-  `zvanje_nastavnika` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ime` varchar(45) NOT NULL,
+  `prezime` varchar(45) NOT NULL,
+  `zvanje` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `nastavnik`
 --
 
-INSERT INTO `nastavnik` (`id_nastavnika`, `ime_nastavnika`, `prezime_nastavnika`, `zvanje_nastavnika`) VALUES
-(1, 'Ognjen', 'Calic', 'dipl. ing'),
-(2, 'Sasa', 'Danilovic', 'prof. dr'),
-(3, 'Igor', 'Skrebic', 'doc. dr'),
-(4, 'Aleksandar', 'Kelec', 'visi asistent'),
-(5, 'Ognjen', 'Joldzic', 'doc. dr'),
-(6, 'Ognjen', 'Stankovic', 'dipl. oec'),
-(7, 'Nikola', 'Obradovic', 'visi asistent'),
-(8, 'sadas', 'asdasdas', 'wqrewre');
-
--- --------------------------------------------------------
+LOCK TABLES `nastavnik` WRITE;
+/*!40000 ALTER TABLE `nastavnik` DISABLE KEYS */;
+INSERT INTO `nastavnik` VALUES (1,'Ognjen','Calic','dipl. ing'),(2,'Sasa','Danilovic','prof. dr'),(3,'Igor','Skrebic','doc. dr'),(4,'Aleksandar','Kelec','visi asistent'),(5,'Ognjen','Joldzic','doc. dr'),(6,'Ognjen','Stankovic','dipl. oec'),(7,'Nikola','Obradovic','visi asistent'),(8,'iu','uyiyui','yuiyuiy');
+/*!40000 ALTER TABLE `nastavnik` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `oglas`
 --
 
+DROP TABLE IF EXISTS `oglas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `oglas` (
-  `id_oglasa` int(11) NOT NULL,
-  `naziv_oglasa` varchar(45) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `naziv` varchar(45) NOT NULL,
   `sadrzaj` varchar(450) NOT NULL,
   `datum` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `aktivan` tinyint(4) NOT NULL,
-  `oglasna ploca_id_oglasne_ploce` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ploca_fk` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_oglas_oglasna ploca1_idx` (`ploca_fk`),
+  CONSTRAINT `fk_oglas_oglasna ploca1` FOREIGN KEY (`ploca_fk`) REFERENCES `ploca` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `oglas`
 --
 
-INSERT INTO `oglas` (`id_oglasa`, `naziv_oglasa`, `sadrzaj`, `datum`, `aktivan`, `oglasna ploca_id_oglasne_ploce`) VALUES
-(1, 'Dodjela diploma', 'Dodjela diploma ce se odrzati u zgradi vlade.', '2019-11-30 22:36:51', 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `oglasna_ploca`
---
-
-CREATE TABLE `oglasna_ploca` (
-  `id_oglasne_ploce` int(11) NOT NULL,
-  `oglasna_ploca` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+LOCK TABLES `oglas` WRITE;
+/*!40000 ALTER TABLE `oglas` DISABLE KEYS */;
+INSERT INTO `oglas` VALUES (1,'Dodjela diploma','Dodjela diploma ce se odrzati u zgradi vlade.','2019-11-30 22:36:51',1,1);
+/*!40000 ALTER TABLE `oglas` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Dumping data for table `oglasna_ploca`
+-- Table structure for table `ploca`
 --
 
-INSERT INTO `oglasna_ploca` (`id_oglasne_ploce`, `oglasna_ploca`) VALUES
-(1, 'Informacije'),
-(2, 'sadasdasdqwewqdasdasdklasjdklasdj'),
-(3, 'dfdsfsdfsdfsfkklsdjfkd'),
-(4, '111111111111'),
-(5, 'fgd4444');
+DROP TABLE IF EXISTS `ploca`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ploca` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ploca` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `ploca`
+--
+
+LOCK TABLES `ploca` WRITE;
+/*!40000 ALTER TABLE `ploca` DISABLE KEYS */;
+INSERT INTO `ploca` VALUES (1,'Informacije');
+/*!40000 ALTER TABLE `ploca` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `predmet`
 --
 
+DROP TABLE IF EXISTS `predmet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `predmet` (
-  `id_predmeta` int(11) NOT NULL,
-  `naziv_predmeta` varchar(45) NOT NULL,
-  `obavezan_predmet` tinyint(4) NOT NULL,
-  `ects` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `naziv` varchar(45) NOT NULL,
+  `obavezan` tinyint(4) NOT NULL,
+  `ects` int(3) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `predmet`
 --
 
-INSERT INTO `predmet` (`id_predmeta`, `naziv_predmeta`, `obavezan_predmet`, `ects`) VALUES
-(1, 'matematika', 1, 60),
-(2, 'fizika', 1, 60),
-(3, 'engleski jezik', 1, 30),
-(4, 'hemija', 0, 30);
+LOCK TABLES `predmet` WRITE;
+/*!40000 ALTER TABLE `predmet` DISABLE KEYS */;
+INSERT INTO `predmet` VALUES (1,'matematika',1,60),(2,'fizika',1,60),(3,'engleski jezik',1,30),(4,'hemija',0,30);
+/*!40000 ALTER TABLE `predmet` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- --------------------------------------------------------
+--
+-- Table structure for table `program`
+--
+
+DROP TABLE IF EXISTS `program`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `program` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `naziv` varchar(45) NOT NULL,
+  `ciklus_fk` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_studijski program_ciklus1_idx` (`ciklus_fk`),
+  CONSTRAINT `fk_studijski program_ciklus1` FOREIGN KEY (`ciklus_fk`) REFERENCES `ciklus` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `program`
+--
+
+LOCK TABLES `program` WRITE;
+/*!40000 ALTER TABLE `program` DISABLE KEYS */;
+INSERT INTO `program` VALUES (1,'matematika',1),(2,'bilogija',1),(3,'informatika',1),(4,'geografija',1),(5,'prostorno planiranje',1),(6,'ITP100',1),(7,'ITP1000',3);
+/*!40000 ALTER TABLE `program` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `studenti`
 --
 
+DROP TABLE IF EXISTS `studenti`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `studenti` (
-  `id_studenta` int(11) NOT NULL,
-  `ime_studenta` varchar(45) NOT NULL,
-  `prezime_studenta` varchar(45) NOT NULL,
-  `broj_indeksa` varchar(45) NOT NULL,
-  `godina_upisa` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ime` varchar(45) NOT NULL,
+  `prezime` varchar(45) NOT NULL,
+  `indeks` varchar(45) NOT NULL,
+  `upis` int(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `studenti`
 --
 
-INSERT INTO `studenti` (`id_studenta`, `ime_studenta`, `prezime_studenta`, `broj_indeksa`, `godina_upisa`) VALUES
-(1, 'Aleksandar', 'Aćić', '11', 15),
-(2, 'Branko', 'Branković', '22', 15),
-(3, 'Veso', 'Vesić', '33', 16),
-(4, 'Goran', 'Vesic', '16-19', 18),
-(5, 'Sinisa', 'Kesic', '17-17', 17),
-(6, 'Veso', 'Vesic', '11', 2019),
-(7, 'Maja', 'Kumovic', '275', 2011),
-(8, 'Aleksandar', 'Nikolic', '5', 2019),
-(9, 'Aleksandar', 'Nikolic', '5', 2019),
-(10, 'Dragan', 'Kovacevic', '12', 2018),
-(11, 'Maja', 'Kumovic', '275', 2011),
-(12, 'bla', 'nja', '2222', 1111);
+LOCK TABLES `studenti` WRITE;
+/*!40000 ALTER TABLE `studenti` DISABLE KEYS */;
+INSERT INTO `studenti` VALUES (1,'Aleksandar','Aćić','11',15),(2,'Branko','Branković','22',15),(3,'Veso','Vesić','33',16),(4,'Goran','Vesic','16-19',18),(5,'Sinisa','Kesic','17-17',17),(6,'Veso','Vesic','11',2019),(7,'Maja','Kumovic','275',2011),(8,'Aleksandar','Nikolic','5',2019),(9,'Aleksandar','Nikolic','5',2019),(10,'Dragan','Kovacevic','12',2018),(11,'Maja','Kumovic','275',2011),(12,'j','hgjg','55',55),(13,'uy','tyuty','44',44);
+/*!40000 ALTER TABLE `studenti` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `studijski_program`
---
-
-CREATE TABLE `studijski_program` (
-  `id_studijski_program` int(11) NOT NULL,
-  `naziv` varchar(45) NOT NULL,
-  `ciklus_id_ciklus` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `studijski_program`
---
-
-INSERT INTO `studijski_program` (`id_studijski_program`, `naziv`, `ciklus_id_ciklus`) VALUES
-(1, 'matematika', 1),
-(2, 'bilogija', 1),
-(3, 'informatika', 1),
-(4, 'geografija', 1),
-(5, 'prostorno planiranje', 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `ciklus`
---
-ALTER TABLE `ciklus`
-  ADD PRIMARY KEY (`id_ciklus`);
-
---
--- Indexes for table `ispiti`
---
-ALTER TABLE `ispiti`
-  ADD PRIMARY KEY (`id_ispit`),
-  ADD KEY `fk_ispiti_nastavnik_idx` (`nastavnik_id_nastavnika`),
-  ADD KEY `fk_ispiti_predmet1_idx` (`predmet_id_predmeta`),
-  ADD KEY `fk_ispiti_studenti1_idx` (`studenti_id_studenta`),
-  ADD KEY `fk_ispiti_studijski program1_idx` (`studijski_program_id_studijski_program`);
-
---
--- Indexes for table `nastavnik`
---
-ALTER TABLE `nastavnik`
-  ADD PRIMARY KEY (`id_nastavnika`);
-
---
--- Indexes for table `oglas`
---
-ALTER TABLE `oglas`
-  ADD PRIMARY KEY (`id_oglasa`),
-  ADD KEY `fk_oglas_oglasna ploca1_idx` (`oglasna ploca_id_oglasne_ploce`);
-
---
--- Indexes for table `oglasna_ploca`
---
-ALTER TABLE `oglasna_ploca`
-  ADD PRIMARY KEY (`id_oglasne_ploce`);
-
---
--- Indexes for table `predmet`
---
-ALTER TABLE `predmet`
-  ADD PRIMARY KEY (`id_predmeta`);
-
---
--- Indexes for table `studenti`
---
-ALTER TABLE `studenti`
-  ADD PRIMARY KEY (`id_studenta`);
-
---
--- Indexes for table `studijski_program`
---
-ALTER TABLE `studijski_program`
-  ADD PRIMARY KEY (`id_studijski_program`),
-  ADD KEY `fk_studijski program_ciklus1_idx` (`ciklus_id_ciklus`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `ciklus`
---
-ALTER TABLE `ciklus`
-  MODIFY `id_ciklus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `ispiti`
---
-ALTER TABLE `ispiti`
-  MODIFY `id_ispit` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `nastavnik`
---
-ALTER TABLE `nastavnik`
-  MODIFY `id_nastavnika` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `oglas`
---
-ALTER TABLE `oglas`
-  MODIFY `id_oglasa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `oglasna_ploca`
---
-ALTER TABLE `oglasna_ploca`
-  MODIFY `id_oglasne_ploce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `predmet`
---
-ALTER TABLE `predmet`
-  MODIFY `id_predmeta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `studenti`
---
-ALTER TABLE `studenti`
-  MODIFY `id_studenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `studijski_program`
---
-ALTER TABLE `studijski_program`
-  MODIFY `id_studijski_program` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `ispiti`
---
-ALTER TABLE `ispiti`
-  ADD CONSTRAINT `fk_ispiti_nastavnik` FOREIGN KEY (`nastavnik_id_nastavnika`) REFERENCES `nastavnik` (`id_nastavnika`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ispiti_predmet1` FOREIGN KEY (`predmet_id_predmeta`) REFERENCES `predmet` (`id_predmeta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ispiti_studenti1` FOREIGN KEY (`studenti_id_studenta`) REFERENCES `studenti` (`id_studenta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ispiti_studijski program1` FOREIGN KEY (`studijski_program_id_studijski_program`) REFERENCES `studijski_program` (`id_studijski_program`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `oglas`
---
-ALTER TABLE `oglas`
-  ADD CONSTRAINT `fk_oglas_oglasna ploca1` FOREIGN KEY (`oglasna ploca_id_oglasne_ploce`) REFERENCES `oglasna_ploca` (`id_oglasne_ploce`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `studijski_program`
---
-ALTER TABLE `studijski_program`
-  ADD CONSTRAINT `fk_studijski program_ciklus1` FOREIGN KEY (`ciklus_id_ciklus`) REFERENCES `ciklus` (`id_ciklus`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-12-09  9:19:29
